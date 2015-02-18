@@ -253,7 +253,7 @@ hr {
   background: rgba(238, 228, 218, 0.35);
 }
 .grid-cell-disabled {
-  background: rgba(17, 27, 37, 0.35);
+  background: rgba(17, 27, 37, 0);
 }
 .grid-cell:last-child {
   margin-right: 0;
@@ -581,6 +581,21 @@ hr {
 .game-intro {
   margin-bottom: 0;
 }
+
+.restart-button {
+  display: inline-block;
+  background: #8f7a66;
+  border-radius: 3px;
+  padding: 0 20px;
+  text-decoration: none;
+  color: #f9f6f2;
+  height: 40px;
+  line-height: 42px;
+  cursor: pointer;
+  display: block;
+  text-align: center;
+  float: right; }
+  
 .game-explanation {
   margin-top: 50px;
 }

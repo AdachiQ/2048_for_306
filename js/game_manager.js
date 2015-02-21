@@ -178,10 +178,10 @@ GameManager.prototype.move = function (direction) {
 
           // The mighty 2048 tile
 		  if(merged.value==2048 && self.level==0) self.level=1;
-		  else if (merged.value < 44972) self.level = 0;
-		  else if (merged.value < 120880) self.level = 1;
-		  else self.level = 2;
-		  if (merged.value === 2048 || this.level>this.noticeTimes) self.won = true;
+		  else if (self.score >=120880) self.level = 3;
+		  else if (self.score>=44972) self.level = 2;
+		  
+		  if (self.level>this.noticeTimes) self.won = true;
 		  
         } else {
           self.moveTile(tile, positions.farthest);

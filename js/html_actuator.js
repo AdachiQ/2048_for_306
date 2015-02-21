@@ -3,6 +3,7 @@ function HTMLActuator() {
   this.scoreContainer   = document.querySelector(".score-container");
   this.bestContainer    = document.querySelector(".best-container");
   this.messageContainer = document.querySelector(".game-message");
+  this.logo				= document.getElementById("logo");
 
   this.score = 0;
 }
@@ -23,6 +24,13 @@ HTMLActuator.prototype.actuate = function (grid, metadata) {
 
     self.updateScore(metadata.score);
     self.updateBestScore(metadata.bestScore);
+	
+	switch(metadata.level){
+		case 1:self.logo.style.backgroundImage = "url(img/sheep.gif)";break;
+		case 2:self.logo.style.backgroundImage = "url(img/dog.png)";break;
+		case 3:self.logo.style.backgroundImage = "url(img/bossxu.png)";break;
+		default:self.logo.style.backgroundImage = "url(img/what.png)";
+	}
 
     if (metadata.terminated) {
       if (metadata.over) {
@@ -134,10 +142,16 @@ HTMLActuator.prototype.updateBestScore = function (bestScore) {
 HTMLActuator.prototype.message = function (won,score,level,noticeTimes) {
   var type    = won ? "game-won" : "game-over";
   var message;
-  if(!won) message = "失败！离花姐的最低水平还有" + (44972-score) +"分，请继续努力！";
-  else if(level == 0) message = "2048达成！离花姐的最低水平还有" + (44972-2048) +"分，请继续努力！";
-  else if(level==1) message = "达到花姐的最低水平！";
-  else 
+  if(!won){
+	switch(level){
+	 case 2:message = "恭喜你超越花姐的最低水平，领先" + (score-44972) + "分";break;
+	 case 3:message = "恭喜你超越花姐的最高水平，领先" + (score-120880) + "分";break;
+	 default: message = "失败！离花姐的最低水平还有" + (44972-score) +"分，请继续努力！";
+	}
+  }
+  else if(level === 1) message = "小有成就，解锁小羊logo";
+  else if(level===2) message = "达到花姐的最低水平！解锁花姐的狗logo";
+  else message = "达到花姐的最高水平！解锁花姐的徐总logo";
 
   this.messageContainer.classList.add(type);
   this.messageContainer.getElementsByTagName("p")[0].textContent = message;

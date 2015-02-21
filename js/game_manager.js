@@ -29,7 +29,7 @@ GameManager.prototype.keepPlaying = function () {
 
 // Return true if the game is lost, or has won and the user hasn't kept playing
 GameManager.prototype.isGameTerminated = function () {
-  return this.over || (this.won && this.noticeTimes<this.level);
+  return this.over || (this.won && (this.noticeTimes<this.level));
 };
 
 // Set up the game
@@ -177,11 +177,15 @@ GameManager.prototype.move = function (direction) {
           self.score += merged.value;
 
           // The mighty 2048 tile
-		  if(merged.value==2048 && self.level==0) self.level=1;
-		  else if (self.score >=120880) self.level = 3;
-		  else if (self.score>=44972) self.level = 2;
+		  var min = 2048;
+		  var record1 = 44972;
+		  var record2 = 120880;
 		  
-		  if (self.level>this.noticeTimes) self.won = true;
+		  if(merged.value==min && self.level==0) self.level=1;
+		  else if (self.score >=record2) self.level = 3;
+		  else if (self.score>=record1) self.level = 2;
+		  
+		  if (self.level>self.noticeTimes) self.won = true;
 		  
         } else {
           self.moveTile(tile, positions.farthest);

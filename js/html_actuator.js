@@ -3,6 +3,7 @@ function HTMLActuator() {
   this.scoreContainer   = document.querySelector(".score-container");
   this.bestContainer    = document.querySelector(".best-container");
   this.messageContainer = document.querySelector(".game-message");
+  
   this.logo				= document.getElementById("logo");
 
   this.score = 0;
@@ -10,6 +11,13 @@ function HTMLActuator() {
 
 HTMLActuator.prototype.actuate = function (grid, metadata) {
   var self = this;
+  
+  switch(metadata.level){
+		case 1:self.logo.style.backgroundImage  = "url(img/sheep.gif)";break;
+		case 2:self.logo.style.backgroundImage  = "url(img/dog.png)";break;
+		case 3:self.logo.style.backgroundImage  = "url(img/bossxu.png)";break;
+		default:self.logo.style.backgroundImage = "url(img/what.png)";
+ }
 
   window.requestAnimationFrame(function () {
     self.clearContainer(self.tileContainer);
@@ -25,12 +33,7 @@ HTMLActuator.prototype.actuate = function (grid, metadata) {
     self.updateScore(metadata.score);
     self.updateBestScore(metadata.bestScore);
 	
-	switch(metadata.level){
-		case 1:self.logo.style.backgroundImage = "url(img/sheep.gif)";break;
-		case 2:self.logo.style.backgroundImage = "url(img/dog.png)";break;
-		case 3:self.logo.style.backgroundImage = "url(img/bossxu.png)";break;
-		default:self.logo.style.backgroundImage = "url(img/what.png)";
-	}
+	
 
     if (metadata.terminated) {
       if (metadata.over) {

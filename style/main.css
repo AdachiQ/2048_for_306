@@ -187,13 +187,26 @@ hr {
 .game-container .game-message p {
   font-size: 40px;
   font-weight: bold;
-  height: 60px;
+  /*height: 60px;*/
   line-height: 60px;
   margin-top: 150px;
 }
+@media screen and (max-width: 520px) {
+.game-container .game-message p {
+    font-size: 20px;
+	margin-top: 50px;
+  }
+}
+
 .game-container .game-message .lower {
   display: block;
   margin-top: 80px;
+}
+
+@media screen and (max-width: 520px) {
+.game-container .game-message .lower {
+	margin-top: 50px;
+  }
 }
 .game-container .game-message a {
   display: inline-block;

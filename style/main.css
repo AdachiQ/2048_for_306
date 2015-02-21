@@ -254,6 +254,11 @@ hr {
 }
 .grid-cell-disabled {
   background: rgba(17, 27, 37, 0);
+  background-image: url("../img/sheep.gif");
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-origin: content-box;
+    background-position: center center;
 }
 .grid-cell:last-child {
   margin-right: 0;

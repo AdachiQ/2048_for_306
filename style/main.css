@@ -174,7 +174,7 @@ hr {
   right: 0;
   bottom: 0;
   left: 0;
-  background: rgba(238, 228, 218, 0.5);
+  background: rgba(238, 228, 218, 0.8);
   z-index: 100;
   text-align: center;
   -webkit-animation: fade-in 500ms ease 100ms;
@@ -193,8 +193,8 @@ hr {
 }
 @media screen and (max-width: 520px) {
 .game-container .game-message p {
-    font-size: 20px;
-	margin-top: 50px;
+    font-size: 15px;
+	margin-top: 30px;
   }
 }
 
@@ -205,7 +205,7 @@ hr {
 
 @media screen and (max-width: 520px) {
 .game-container .game-message .lower {
-	margin-top: 50px;
+	margin-top: 100px;
   }
 }
 .game-container .game-message a {

@@ -26,9 +26,9 @@ HTMLActuator.prototype.actuate = function (grid, metadata) {
 
     if (metadata.terminated) {
       if (metadata.over) {
-        self.message(false); // You lose
+        self.message(false,metadata.score,metadata.level,metadata.noticeTimes); // You lose
       } else if (metadata.won) {
-        self.message(true); // You win!
+        self.message(true,metadata.score,metadata.level,metadata.noticeTimes); // You win!
       }
     }
 
@@ -131,9 +131,13 @@ HTMLActuator.prototype.updateBestScore = function (bestScore) {
   this.bestContainer.textContent = bestScore;
 };
 
-HTMLActuator.prototype.message = function (won) {
+HTMLActuator.prototype.message = function (won,score,level,noticeTimes) {
   var type    = won ? "game-won" : "game-over";
-  var message = won ? "You win!" : "Game over!";
+  var message;
+  if(!won) message = "失败！离花姐的最低水平还有" + (44972-score) +"分，请继续努力！";
+  else if(level == 0) message = "2048达成！离花姐的最低水平还有" + (44972-2048) +"分，请继续努力！";
+  else if(level==1) message = "达到花姐的最低水平！";
+  else 
 
   this.messageContainer.classList.add(type);
   this.messageContainer.getElementsByTagName("p")[0].textContent = message;

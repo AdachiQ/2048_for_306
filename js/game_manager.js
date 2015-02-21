@@ -22,6 +22,7 @@ GameManager.prototype.restart = function () {
 
 // Keep playing after winning (allows going over 2048)
 GameManager.prototype.keepPlaying = function () {
+  this.noticeTimes = this.level;
   this.keepPlaying = true;
   this.actuator.continueGame(); // Clear the game won/lost message
 };
@@ -43,12 +44,16 @@ GameManager.prototype.setup = function () {
     this.over        = previousState.over;
     this.won         = previousState.won;
     this.keepPlaying = previousState.keepPlaying;
+	this.level		 = previousState.level;
+	this.noticeTimes = previousState.noticeTimes;
   } else {
     this.grid        = new Grid(this.size);
     this.score       = 0;
     this.over        = false;
     this.won         = false;
     this.keepPlaying = false;
+	this.level		 = 0;
+	this.noticeTimes = 0;
 
     // Add the initial tiles
     this.addStartTiles();
@@ -81,6 +86,10 @@ GameManager.prototype.actuate = function () {
     this.storageManager.setBestScore(this.score);
   }
 
+  if(this.storageManager.getLevel() != this.level) this.storageManager.setLevel(this.level);
+  
+  if(this.storageManager.getNoticeTimes() != this.noticeTimes) this.storageManager.setNoticeTimes(this.noticeTimes);
+  
   // Clear the state when the game is over (game over only, not win)
   if (this.over) {
     this.storageManager.clearGameState();
@@ -93,7 +102,9 @@ GameManager.prototype.actuate = function () {
     over:       this.over,
     won:        this.won,
     bestScore:  this.storageManager.getBestScore(),
-    terminated: this.isGameTerminated()
+    terminated: this.isGameTerminated(),
+	level:		this.level,
+	noticeTimes:this.noticeTimes
   });
 
 };
@@ -105,7 +116,9 @@ GameManager.prototype.serialize = function () {
     score:       this.score,
     over:        this.over,
     won:         this.won,
-    keepPlaying: this.keepPlaying
+    keepPlaying: this.keepPlaying,
+	level:		 this.level,
+	noticeTimes:this.noticeTimes
   };
 };
 
@@ -164,7 +177,12 @@ GameManager.prototype.move = function (direction) {
           self.score += merged.value;
 
           // The mighty 2048 tile
-          if (merged.value === 2048) self.won = true;
+		  if(merged.value==2048 && self.level==0) self.level=1;
+		  else if (merged.value < 44972) self.level = 0;
+		  else if (merged.value < 120880) self.level = 1;
+		  else self.level = 2;
+		  if (merged.value === 2048 || this.level>this.noticeTimes) self.won = true;
+		  
         } else {
           self.moveTile(tile, positions.farthest);
         }

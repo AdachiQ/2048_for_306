@@ -16,7 +16,7 @@ body {
   clear: both;
 }
 h1.title {
-  font-size: 80px;
+  font-size: 70px;
   font-weight: bold;
   margin: 0;
   display: block;
@@ -98,10 +98,10 @@ h1.title {
   animation-fill-mode: both;
 }
 .score-container:after {
-  content:"Score";
+  content:"得分";
 }
 .best-container:after {
-  content:"Best";
+  content:"记录";
 }
 p {
   margin-top: 0;
@@ -578,8 +578,16 @@ hr {
   -moz-animation-fill-mode: backwards;
   animation-fill-mode: backwards;
 }
+
+.above-game:after {
+  content: "";
+  display: block;
+  clear: both; }
+  
 .game-intro {
-  margin-bottom: 0;
+  float: left;
+  line-height: 42px;
+  margin-bottom: 0; 
 }
 
 .restart-button {
@@ -608,7 +616,7 @@ hr {
     padding: 0 20px;
   }
   h1.title {
-    font-size: 27px;
+    font-size: 25px;
     margin-top: 15px;
   }
   .container {
@@ -623,6 +631,20 @@ hr {
   .heading {
     margin-bottom: 10px;
   }
+  
+  .game-intro {
+    width: 55%;
+    display: block;
+    box-sizing: border-box;
+    line-height: 1.65; }
+
+  .restart-button {
+    width: 42%;
+    padding: 0;
+    display: block;
+    box-sizing: border-box;
+    margin-top: 2px; }
+	
   .game-container {
     margin-top: 40px;
     position: relative;
@@ -851,3 +873,39 @@ hr {
     margin-top: 30px !important;
   }
 }
+
+.app-notice {
+  position: relative;
+  -webkit-animation: pop-in-big 700ms ease 2s both;
+  -moz-animation: pop-in-big 700ms ease 2s both;
+  animation: pop-in-big 700ms ease 2s both;
+  background: black;
+  color: white;
+  padding: 18px;
+  margin-top: 30px;
+  height: 56px;
+  box-sizing: border-box;
+  border-radius: 3px; }
+  .app-notice:after {
+    content: "";
+    display: block;
+    clear: both; }
+  .app-notice .notice-close-button {
+    float: right;
+    font-weight: bold;
+    cursor: pointer;
+    margin-left: 10px;
+    opacity: 0.7; }
+  .app-notice p {
+    margin-bottom: 0; }
+  .app-notice, .app-notice p {
+    line-height: 20px; }
+  .app-notice a {
+    color: white; }
+  @media screen and (max-width: 520px) {
+    .app-notice {
+      -webkit-animation: pop-in-small 700ms ease 2s both;
+      -moz-animation: pop-in-small 700ms ease 2s both;
+      animation: pop-in-small 700ms ease 2s both;
+      margin-top: 10px;
+      height: 76px; } }
